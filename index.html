@@ -13,13 +13,17 @@
    <body>
     <template id="modalGutsTemplate">
       <div class='quizModalContainerInner'>
-        <section class= "quizProgressionTracker">
+        <!-- <section class= "quizProgressionTracker">
           <ul>
             <li>Question: <span class="questionNumber" id="questionNumber"> </span>/10</li>
             <li>Correct: <span class="correctScore" id="correctScore"> </span></li>
             <li>Incorrect: <span class="incorrectScore" id= "incorrectScore"></span></li>
           </ul>
-        </section>
+        </section> -->
+        <template id="nextbutton"> </template>
+          <button type="button" class="bttn" id="nextBttn">Next Question!</button>
+        </template>
+       
         <form id="quizForm">
           <div id="quizQuestions"></div>
         <form>
@@ -32,7 +36,7 @@
       </label>
     </template>
     <header role="banner">
-      <h1>Cognition and Mental Heuristics Quiz</h1>
+      <h1>Cognition & Mental Heuristics</h1>
     </header>
     <main role="main" class= "main">
         <h2>
@@ -45,7 +49,6 @@
             our brains commonly help us.
         </h2>
         <button type="button" class="bttn" id="startBttn">Start the quiz!</button>
-        <button type="button" class="bttn" id="nextBttn">Start the quiz!</button>
       </main>
     <aside class="quizModalContainer" class= "quizModalContainer" id="quizModalContainer"></aside>
     <!-- jQuery Modal -->
