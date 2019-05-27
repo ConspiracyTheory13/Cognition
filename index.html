@@ -11,49 +11,42 @@
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
   </head>
    <body>
+<!--     
     <template id="modalGutsTemplate">
       <div class='quizModalContainerInner'>
-        <!-- <section class= "quizProgressionTracker">
-          <ul>
-            <li>Question: <span class="questionNumber" id="questionNumber"> </span>/10</li>
-            <li>Correct: <span class="correctScore" id="correctScore"> </span></li>
-            <li>Incorrect: <span class="incorrectScore" id= "incorrectScore"></span></li>
-          </ul>
-        </section> -->
-        <template id="nextbutton"> </template>
-          <button type="button" class="bttn" id="nextBttn">Next Question!</button>
-        </template>
-       
         <form id="quizForm">
           <div id="quizQuestions"></div>
         <form>
       </div>
     </template>
-     <template id="radioQuestion"> 
-      <label>
-        <span></span>
-        <input type="radio" class= "answerOption" name="answer" value="0">
-      </label>
-    </template>
-    <header role="banner">
-      <h1>Cognition & Mental Heuristics</h1>
-    </header>
-    <main role="main" class= "main">
-        <h2>
-            We make decisions and judgments every day. If we were to carefully consider and analyze
-            every possible outcome of every decision and judgment, we would never get anything done!
-            Thankfully our brain makes this easier for us by using cognitive shortcuts.
-            A heuristic is a mental shortcut that helps us make decisions quickly.
-            Usually these short cuts are helpful in keeping us from becoming overloaded, however there
-            are some pitfalls to these short cuts! Start the quiz to learn about some of the ways that
-            our brains commonly help us.
-        </h2>
-        <button type="button" class="bttn" id="startBttn">Start the quiz!</button>
+     -->
+     <div id="startingQuizPage">
+      <header role="banner">
+        <h1>Cognition & Mental Heuristics</h1>
+      </header>
+      
+      <main role="main" class= "main">
+          <h2>
+              We make decisions and judgments every day. If we were to carefully consider and analyze
+              every possible outcome of every decision and judgment, we would never get anything done!
+              Thankfully our brain makes this easier for us by using cognitive shortcuts.
+              A heuristic is a mental shortcut that helps us make decisions quickly.
+              Usually these short cuts are helpful in keeping us from becoming overloaded, however there
+              are some pitfalls to these short cuts! Start the quiz to learn about some of the ways that
+              our brains commonly help us.
+          </h2>
+          <button type="button" class="bttn" id="startButton">Start Quiz!</button>
+      </div>    
       </main>
-    <aside class="quizModalContainer" class= "quizModalContainer" id="quizModalContainer"></aside>
-    <!-- jQuery Modal -->
+    <aside class="quizModalContainer" id="quizModalContainer">
+      <div id="modalGutsTemplate">
+      <div id="quizProgressionTracker"></div>
+      <div id="questionsAndAnswers"></div>
+      <div id="buttonContainer"></div>
+      </div> 
+    </aside>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <script src="/index2.js" type="module"></script>
   </body>
