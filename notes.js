@@ -99,7 +99,32 @@
 //               showClose: false
 //     }).append(buildQuizForm)
 // };
-
+function createSlide(questionNumber) {
+     currentSlide = document.getElementById('slide' + [questionNumber])
+     currentSlide.classList.remove('hidden');
+    
+ 
+     //      console.log("createSlide is firing")
+ 
+ //      var element = document.getElementById("myDIV");
+ //      element.classList.remove("mystyle");
+ //    }
+         //  currentSlide = n;
+     
+      //  slides[n].addClass('active-slide');
+     //  slides[currentSlide].removeClass('active-slide');
+ 
+     //  $('slide'+ [questionNumber]).removeClass('hidden');
+     //  id="$('slide` + [questionNumber] + `')
+  
+     //  if(currentSlide === slides.length-1){
+     // //    nextButton.style.display = 'none';
+     // //    submitButton.style.display = 'inline-block';
+     //  }
+     //  else{
+     // //    nextButton.style.display = 'inline-block';
+     // //    submitButton.style.display = 'none';
+     //  }
 // } else {f
    // renderResults();
    // restartQuiz();

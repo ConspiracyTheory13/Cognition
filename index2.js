@@ -54,10 +54,10 @@ function buildQuizForm() {
         
         output.push(
           `<div class="slideBackground">
-                <div class="slide" +  id="${'slide'+ questionNumber}">    
+                <div class="slide hidden" +  id="$('slide` + [questionNumber] + `')">    
                     <div class="table">
                         <ul id="horizontal-list">
-                            <li>Question: <span class="currentQuestion">` + currentQuestion + `</span>/10</li>
+                            <li>Question: <span class="currentQuestion">` + $(currentQuestion) + `</span>/10</li>
                             <li> Incorrect Score: ${incorrectScore}</li>
                             <li> Correct Score: ${correctScore}</li>
                         </ul>
@@ -74,39 +74,28 @@ function buildQuizForm() {
 }
 
 const nextButton = document.getElementById("nextButton");
-const slides = document.querySelectorAll(".slide");
+// const slides = document.querySelectorAll(".slide");
 
 //function called Create Slide
 
-//so for my pagination I need to select all slides
-//apply class "active" to currentSlide
-//apply class "hidden" to all other slides
-// starting here:
+//so for my pagination I have set all slides to having a class = "slide hidden". 
+//so if I need to use my function createSlide to target 'slide' + [questionNumber] and remove class "hidden" 
 
-// ${'slide'+ questionNumber}"
+let currentSlide = 0;
 
-// let currentSlide = 0;
+function createSlide(questionNumber) {
+    currentSlide = document.getElementById('slide' + [questionNumber])
+    currentSlide.classList.remove('hidden');
+   }
+  //will I need a function to put hidden class back onto old slides or will they automatically update?
+  
+  const showNextSlide = () => {
+    updateQuestionNumber();
+    updateCurrentQuestion();             
+    showSlide(currentSlide + 1);
+  }
 
-// function createSlide(n) {
-//      console.log("createSlide is firing")
-//      currentSlide = n;
-//      slides[n].addClass('active-slide');
-//      slides[currentSlide].removeClass('active-slide');
-    
-//      if(currentSlide === slides.length-1){
-//        nextButton.style.display = 'none';
-//        submitButton.style.display = 'inline-block';
-//      }
-//      else{
-//        nextButton.style.display = 'inline-block';
-//        submitButton.style.display = 'none';
-//      }
-//    }
-//    createSlide(0);
 
-//   function showNextSlide() {
-//     showSlide(currentSlide + 1);
-//   }
 
   const startQuiz = () => {
     console.log('startQuiz is being run!')
@@ -116,6 +105,7 @@ const slides = document.querySelectorAll(".slide");
      $("#buttonContainer").html(buttons)
     //  $(currentSlide).removeClass("hidden");
     //  $(".slide").removeClass("hidden");
+     createSlide(questionNumber);
      $("#nextButton").removeClass("hidden");
      hideStartPage();
      };
