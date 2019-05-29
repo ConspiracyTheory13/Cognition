@@ -1,3 +1,4 @@
+
 // import {STORE} from './questionLibrary2.js';
 // function questionLibrary() {
     const STORE = [{
@@ -20,94 +21,7 @@
                 d:'Gut Reaction heuristic'
         },
              correctAnswer: 'a'
-        },
-        
-        {
-             question: 'You and your buddy Larry are flipping coins for a probability experiment. Somehow you’ve come up with heads five times in a row! “That’s it,” Larry says. “The next one has got to be tails. It’s statistically impossible!”. Larry is using the:',
-             answers: {
-                a:'Law of the instrument effect',
-                b:'Statistical Bias',
-                c:'Gambler Fallacy',
-                d:'50/50 Theory'
-        },
-             correctAnswer: 'c'
-        },
-    
-        {    question: 'The speaker at the cat flatterer convention is asking for audience members to guess the value of an ultra deluxe set of premium cat furniture. “How much do you think it’s worth?” he asks the audience. “At least 3k, right?” the tendency for the audience to then venture guesses closer in range to the speakers represents the:',
-             answers: {   
-                a:'Attentional Bias',
-                b:'Fluency Heuristic',
-                c:'Anchoring Heuristic',
-                d:'Speaker Fallacy'
-        },
-             correctAnswer: 'c'
-        },
-        
-        {
-             question: 'The tendency for people to value that which is communicated more skillfully or elegantly represents the:',
-             answers: {
-                a:'Anchoring Heuristic',
-                b:'Fluency Heuristic',
-                c:'Brain in a Vat',
-                d:'Same Bias'
-        },     
-             correctAnswer: 'b'
-        },
-    
-        {
-             question: 'The tendency to ignore (generic, general information) and focus on specific information is the:',
-             answers: {
-                a:'Simulation heuristic.',
-                b:'Gambler’s Fallacy',
-                c:'Impact Bias',
-                d:'Base rate fallacy'
-        },
-             correctAnswer: 'd'
-        },
-        
-        {
-             question: 'You watch with baited breath as your race horse glides neck and neck with another, round and around the track. On the final lap your house begins to lag, but at the stretch makes a miraculous recovery. Nonetheless, your horse still loses. “It would have been better if it hadn’t been close at all!” you lament, racking your brain over all the small differences that would have let your horse win. This is an example of the:',
-             answers: {
-                a:'Simulation heuristic',
-                b:'Gambler’s Fallacy',
-                c:'Impact Bias',
-                d:'Learned Helplessness'
-        },
-             correctAnswer: 'a'
-        },
-        
-        {
-             question: 'The tendency for a person to recognize and remember details that confirm preconceived notions is an example of:',
-             answers: {
-                a:'Simulation heuristic.',
-                b:'Observer-expectancy Effect',
-                c:'Optimism Bias',
-                d:'Confirmation bias'
-        },
-             correctAnswer: 'd'
-        },
-        
-        {
-             question: 'The tendency to prescribe a person’s apparent behavior to their personality and to ignore circumstance is the:',
-             answers: {
-                a:'Simulation heuristic.',
-                b:'Gambler Fallacy',
-                c:'Fundamental Attribution Error',
-                d:'Learned Helplessness',
-    
-        },     
-            correctAnswer: 'c'
-        },
-        
-        {
-             question: 'The tendency for an individual to attribute the overall validity of a decision based on the eventual outcome is known as',
-             answers: {
-                a:'Outcome Bias',
-                b:'Normalcy Bias',
-                c:'Omission Bias',
-                d:'Learned Helplessness'
-        },
-             correctAnswer: 'a'
+//this is where the rest of the questions will be pasted in.
             }
     ];
 
@@ -119,20 +33,12 @@ let currentQuestion = 0;
 let letter = [];
 
 let buttons =
-`<button type="button" class="bttn" id="nextButton">Next Question!</button>       
+`<button type="button" class="nextButton hidden" id="nextButton">Next Question!</button>       
 <button type="button" class="bttn hidden" id="scoreButton">Score me!</button>       
-<button type="button" class="bttn hidden" id="replayButton">Score me!</button>`;
-
-let quizProgressionTracker =
-`<div class="table">
-    <ul id="horizontal-list">
-        <li>Question: <span class="currentQuestion"> ${currentQuestion} </span>/10</li>
-        <li> Incorrect Score: ${incorrectScore}</li>
-        <li> Correct Score: ${correctScore}</li>
-    </ul>
-</div>`;     
+<button type="button" class="bttn hidden" id="replayButton">Score me!</button>`;  
 
 function buildQuizForm() {
+    console.log('build quiz form is being run!')
      var output = [];
  STORE.forEach((currentQuestion, questionNumber) => {
         const answers = [];
@@ -141,60 +47,84 @@ function buildQuizForm() {
           <input type ="radio" name="question${questionNumber}" value = "${letter}">
           ${letter}:
           ${currentQuestion.answers[letter]}
-          </label>`);
+          </label> <br>`);
         }
+        //most likely problem is that you're using this id="slideBackground"
+        //`id=${'slideBackground'+questionNumber}
+        
         output.push(
-          `<div class = "quizModalContainer">
-               <div class="slide>
+          `<div class="slideBackground">
+                <div class="slide" +  id="${'slide'+ questionNumber}">    
+                    <div class="table">
+                        <ul id="horizontal-list">
+                            <li>Question: <span class="currentQuestion">` + currentQuestion + `</span>/10</li>
+                            <li> Incorrect Score: ${incorrectScore}</li>
+                            <li> Correct Score: ${correctScore}</li>
+                        </ul>
+                    </div>
                     <div class="question-${questionNumber}">
                     <h1>${STORE[questionNumber].question}</h1>
                     <div class="answers">${answers.join("")}</div>
-               </div>
-          </div>
-          `
+                    <button type="button" class="bttn hidden" id="nextButton">Next Question!</button>
+                </div>
+                </div>`
 )
     quizModalContainer.innerHTML = output.join("")
-
 })
 }
 
-const startQuiz = () => {
-     // $("#quizModalContainer").append(buildQuizForm()).prepend(quizProgressionTracker)
-     // $("#nextButton").removeClass("hidden");
-     // hideStartPage();
-     
+const nextButton = document.getElementById("nextButton");
+const slides = document.querySelectorAll(".slide");
+
+//function called Create Slide
+
+//so for my pagination I need to select all slides
+//apply class "active" to currentSlide
+//apply class "hidden" to all other slides
+// starting here:
+
+// ${'slide'+ questionNumber}"
+
+// let currentSlide = 0;
+
+// function createSlide(n) {
+//      console.log("createSlide is firing")
+//      currentSlide = n;
+//      slides[n].addClass('active-slide');
+//      slides[currentSlide].removeClass('active-slide');
+    
+//      if(currentSlide === slides.length-1){
+//        nextButton.style.display = 'none';
+//        submitButton.style.display = 'inline-block';
+//      }
+//      else{
+//        nextButton.style.display = 'inline-block';
+//        submitButton.style.display = 'none';
+//      }
+//    }
+//    createSlide(0);
+
+//   function showNextSlide() {
+//     showSlide(currentSlide + 1);
+//   }
+
+  const startQuiz = () => {
+    console.log('startQuiz is being run!')
      $("#quizModalContainer").html(modalGutsTemplate)
      $("#quizProgressionTracker").html(quizProgressionTracker)
      $("#questionsAndAnswers").html(buildQuizForm())
      $("#buttonContainer").html(buttons)
+    //  $(currentSlide).removeClass("hidden");
+    //  $(".slide").removeClass("hidden");
      $("#nextButton").removeClass("hidden");
      hideStartPage();
-     // $("#quizProgressionTracker").prepend(quizProgressionTracker); 
-     // $( "#quizProgressionTracker").append(buildQuizForm(),[".buttonContainer"] );
-     // $( ".slide" ).append($( "h2" ));
-};
+     };
 
 
 const hideStartPage = () => { 
+    console.log('hidestartpage running');
      $("#startingQuizPage").addClass("hidden");
 }
-
-//     const startQuiz = () => { 
-//      $("#quizModalContainer").modal({
-//               fadeDuration: 100,
-//               closeExisting: false,
-//               escapeClose: false,
-//               clickClose: false,
-//               showClose: false
-//     }).append(buildQuizForm)
-// };
-
-// } else {f
-   // renderResults();
-   // restartQuiz();
-   // $('.questionNumber').text(10)
-//    console.log('else runs');
-// }
 
 const incremementCorrectScore = () => {
     correctScore++;
@@ -224,54 +154,17 @@ const userIncorrectAnswer = () => {
     incorrectAnswerFeedback();
 }
   
-// let scoreUser = (correctScore) => {
-//     if (correctScore === 10) {
-//         $('#quizModalContPainer').html( `div class="perfectScore">"perfectScore!"</div>`)  
-//     } else if (correctScore < 9 && correctScore >= 5) {
-//         $('#quizModalContainer').html( `div class="goodScore">"goodScore!"</div>`) 
-//     } else {
-//         $('#quizModalContainer').html( `div class="badScore">"Please try again!"</div>`)
-//     }
-    
-//     return (correctScore === 10) ? $('#quizModalContainer').html
-//          : (correctScore < 9 && correctScore >=5) ? $('#quizModalContainer').html( `div class="goodScore">"goodScore!"</div>`) 
-//          : (correctScore < 5) ? $('#quizModalContainer').html( `div class="badScore">"Please try again!"</div>`)
-// };
-
 let replayQuiz = () => {
     location.reload();
 };
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('startButton').addEventListener("click", startQuiz);
-//     document.getElementById('nextButton').addEventListener("click", console.log("Hi"));
+    // document.getElementById('nextButton').addEventListener("click", plusSlides(n));
 //     document.getElementById('replayButton').addEventListener("click", replayQuiz);
 //     document.querySelector('form').addEventListener("submit", scoreUserInput);
 
 
-// const nextButton = document.getElementById("next");
-const slides = document.querySelectorAll(".slide");
-
-let currentSlide = 0;
-
-// function createSlide(n) {
-//      slides[currentSlide].removeClass('active-slide');
-//      slides[n].classList.addClass('active-slide');
-//      currentSlide = n;
-//      if(currentSlide === slides.length-1){
-//        nextButton.style.display = 'none';
-//        submitButton.style.display = 'inline-block';
-//      }
-//      else{
-//        nextButton.style.display = 'inline-block';
-//        submitButton.style.display = 'none';
-//      }
-//    }
-//    createSlide(0);
-
-//   function showNextSlide() {
-//     showSlide(currentSlide + 1);
-//   }
   
 });  
   
