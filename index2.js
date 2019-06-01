@@ -55,7 +55,7 @@ function buildQuizForm() {
         
         output.push(
           `<div class="slideBackground">
-                <div class="slide hidden" +  id="$('currentSlide` + [questionNumber] + `')">    
+                <div class="slide hidden" +  id="currentSlide[` + questionNumber.toString() + `]">    
                     <div class="table">
                         <ul id="horizontal-list">
                             <li>Question: <span class="currentQuestion">` + $(currentQuestion) + `</span>/10</li>
@@ -83,14 +83,14 @@ const nextButton = document.getElementById("nextButton");
 //so if I need to use my function createSlide to target 'slide' + [questionNumber] and remove class "hidden" 
 
 
-currentSlide = document.getElementById('currentSlide' + [questionNumber])
+// currentSlide = document.getElementById('currentSlide' + [questionNumber])
 
 const createSlide = () => {
-    let currentSlide = document.getElementById("currentSlide" + [questionNumber])
+    let currentSlide = document.getElementById('currentSlide['+ questionNumber.toString() + ']');
     currentSlide.classList.toggle("visible");
     currentSlide.classList.toggle("visible", currentQuestion < 10 );
 
-}
+};
 
 //   const showNextSlide = () => {
 //     updateQuestionNumber();
