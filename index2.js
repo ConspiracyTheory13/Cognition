@@ -31,6 +31,7 @@ let correctScore = 0;
 let questionNumber = 0;
 let currentQuestion = 0;
 let letter = [];
+let currentSlide = 0;
 
 let buttons =
 `<button type="button" class="nextButton hidden" id="nextButton">Next Question!</button>       
@@ -54,7 +55,7 @@ function buildQuizForm() {
         
         output.push(
           `<div class="slideBackground">
-                <div class="slide hidden" +  id="$('slide` + [questionNumber] + `')">    
+                <div class="slide hidden" +  id="$('currentSlide` + [questionNumber] + `')">    
                     <div class="table">
                         <ul id="horizontal-list">
                             <li>Question: <span class="currentQuestion">` + $(currentQuestion) + `</span>/10</li>
@@ -81,19 +82,21 @@ const nextButton = document.getElementById("nextButton");
 //so for my pagination I have set all slides to having a class = "slide hidden". 
 //so if I need to use my function createSlide to target 'slide' + [questionNumber] and remove class "hidden" 
 
-let currentSlide = 0;
 
-function createSlide(questionNumber) {
-    currentSlide = document.getElementById('slide' + [questionNumber])
-    currentSlide.classList.remove('hidden');
-   }
-  //will I need a function to put hidden class back onto old slides or will they automatically update?
-  
-  const showNextSlide = () => {
-    updateQuestionNumber();
-    updateCurrentQuestion();             
-    showSlide(currentSlide + 1);
-  }
+currentSlide = document.getElementById('currentSlide' + [questionNumber])
+
+const createSlide = () => {
+    let currentSlide = document.getElementById("currentSlide" + [questionNumber])
+    currentSlide.classList.toggle("visible");
+    currentSlide.classList.toggle("visible", currentQuestion < 10 );
+
+}
+
+//   const showNextSlide = () => {
+//     updateQuestionNumber();
+//     updateCurrentQuestion();             
+//     showSlide(currentSlide + 1);
+//   }
 
 
 
@@ -103,10 +106,8 @@ function createSlide(questionNumber) {
      $("#quizProgressionTracker").html(quizProgressionTracker)
      $("#questionsAndAnswers").html(buildQuizForm())
      $("#buttonContainer").html(buttons)
-    //  $(currentSlide).removeClass("hidden");
-    //  $(".slide").removeClass("hidden");
-     createSlide(questionNumber);
-     $("#nextButton").removeClass("hidden");
+     createSlide();
+    //  $("#nextButton").removeClass("hidden");
      hideStartPage();
      };
 
