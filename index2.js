@@ -55,8 +55,8 @@ function buildQuizForm() {
         
         output.push(
           `<div class="slideBackground">
-                <div class="slide hidden" +  id="currentSlide[` + questionNumber.toString() + `]">    
-                    <div class="table">
+                <div class="slide" +  id="currentSlide[` + questionNumber.toString() + `]">    
+                    <div class="table" id="quizProgressionTracker">
                         <ul id="horizontal-list">
                             <li>Question: <span class="currentQuestion">` + $(currentQuestion) + `</span>/10</li>
                             <li> Incorrect Score: ${incorrectScore}</li>
@@ -75,7 +75,7 @@ function buildQuizForm() {
 }
 
 const nextButton = document.getElementById("nextButton");
-// const slides = document.querySelectorAll(".slide");
+const slides = document.querySelectorAll(".slide");
 
 //function called Create Slide
 
@@ -85,12 +85,12 @@ const nextButton = document.getElementById("nextButton");
 
 // currentSlide = document.getElementById('currentSlide' + [questionNumber])
 
-const createSlide = () => {
-    let currentSlide = document.getElementById('currentSlide['+ questionNumber.toString() + ']');
-    currentSlide.classList.toggle("visible");
-    currentSlide.classList.toggle("visible", currentQuestion < 10 );
+// const createSlide = () => {
+//     console.log("createslide is firing");
+//     let currentSlide = document.getElementById('currentSlide['+ questionNumber.toString() + ']');
+//     // currentSlide.classList.toggle("hidden", currentQuestion <= 10 );
 
-};
+// };
 
 //   const showNextSlide = () => {
 //     updateQuestionNumber();
@@ -102,13 +102,13 @@ const createSlide = () => {
 
   const startQuiz = () => {
     console.log('startQuiz is being run!')
-     $("#quizModalContainer").html(modalGutsTemplate)
-     $("#quizProgressionTracker").html(quizProgressionTracker)
+     $("#quizModalContainer").html("#modalGutsTemplate")
+     $("#quizProgressionTracker").html("#quizProgressionTracker")
      $("#questionsAndAnswers").html(buildQuizForm())
      $("#buttonContainer").html(buttons)
-     createSlide();
+    //  createSlide();
     //  $("#nextButton").removeClass("hidden");
-     hideStartPage();
+    //  hideStartPage();
      };
 
 
@@ -152,8 +152,8 @@ let replayQuiz = () => {
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('startButton').addEventListener("click", startQuiz);
     // document.getElementById('nextButton').addEventListener("click", plusSlides(n));
-//     document.getElementById('replayButton').addEventListener("click", replayQuiz);
-//     document.querySelector('form').addEventListener("submit", scoreUserInput);
+    // document.getElementById('replayButton').addEventListener("click", replayQuiz);
+    // document.querySelector('form').addEventListener("submit", scoreUserInput);
 
 
   
