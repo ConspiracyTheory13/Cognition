@@ -34,7 +34,7 @@ let letter = [];
 let currentSlide = 0;
 
 let buttons =
-`<button type="button" class="nextButton hidden" id="nextButton">Next Question!</button>       
+`<button type="button" class="nextButton" id="nextButton">Next Question!</button>       
 <button type="button" class="bttn hidden" id="scoreButton">Score me!</button>       
 <button type="button" class="bttn hidden" id="replayButton">Play again?</button>`;  
 
@@ -72,6 +72,12 @@ function buildQuizForm() {
 )
     $("#quizModalContainer").html(output.join(""))
 })
+    // document.getElementById('nextButton').addEventListener("click", showNextSlide);
+let nextButton = document.getElementById("nextButton");
+    nextButton.addEventListener("click", () => {
+      showNextSlide();
+      console.log("Button clicked.");
+  });
 }
 
 // const nextButton = document.getElementById("nextButton");
@@ -83,16 +89,15 @@ const createSlide = () => {
     updateQuestionNumber();
     currentSlide = document.getElementById('currentSlide['+ questionNumber.toString() + ']');
     currentSlide.classList.toggle("hidden", false);
-
+    //  $("#nextButton").removeClass("hidden");
 };
 
-//   const showNextSlide = () => {
-//     updateQuestionNumber();
-//     updateCurrentQuestion();             
-//     showSlide(currentSlide + 1);
-//   }
-
-
+    // function showNextSlide() {
+const showNextSlide = () => {
+    console.log("shownextSlide is running!");
+    updateQuestionNumber();
+    updateCurrentQuestion();             
+  }
 
   const startQuiz = () => {
     console.log('startQuiz is being run!')
@@ -101,7 +106,6 @@ const createSlide = () => {
      $("#questionsAndAnswers").html(buildQuizForm())
      $("#buttonContainer").html(buttons) 
      createSlide();
-    //  $("#nextButton").removeClass("hidden");
      hideStartPage();
      };
 
@@ -143,13 +147,12 @@ let replayQuiz = () => {
     location.reload();
 };
 
-document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('startButton').addEventListener("click", startQuiz);
-    document.getElementById('nextButton').addEventListener("click", plusSlides(n));
+    // document.getElementById('nextButton').addEventListener("click", showNextSlide);
     // document.getElementById('replayButton').addEventListener("click", replayQuiz);
     // document.querySelector('form').addEventListener("submit", scoreUserInput);
 
-
+// document.addEventListener("DOMContentLoaded", function(){
   
-});  
+// });  
   
