@@ -66,11 +66,10 @@ function buildQuizForm() {
                     <div class="question-${questionNumber}">
                     <h1>${STORE[questionNumber].question}</h1>
                     <div class="answers">${answers.join("")}</div>
-                    <button type="button" class="bttn hidden" id="nextButton">Next Question!</button>
+                    <button type="button" class="bttn" id="nextButton">Next Question!</button>
                 </div>
                 </div>`
 )
-    // quizModalContainer.innerHTML = output.join("")
     $("#quizModalContainer").html(output.join(""))
 })
 }
@@ -103,7 +102,7 @@ const createSlide = () => {
      $("#buttonContainer").html(buttons) 
      createSlide();
     //  $("#nextButton").removeClass("hidden");
-    //  hideStartPage();
+     hideStartPage();
      };
 
 
@@ -146,7 +145,7 @@ let replayQuiz = () => {
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('startButton').addEventListener("click", startQuiz);
-    // document.getElementById('nextButton').addEventListener("click", plusSlides(n));
+    document.getElementById('nextButton').addEventListener("click", plusSlides(n));
     // document.getElementById('replayButton').addEventListener("click", replayQuiz);
     // document.querySelector('form').addEventListener("submit", scoreUserInput);
 
