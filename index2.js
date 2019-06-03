@@ -36,7 +36,7 @@ let currentSlide = 0;
 let buttons =
 `<button type="button" class="nextButton hidden" id="nextButton">Next Question!</button>       
 <button type="button" class="bttn hidden" id="scoreButton">Score me!</button>       
-<button type="button" class="bttn hidden" id="replayButton">Score me!</button>`;  
+<button type="button" class="bttn hidden" id="replayButton">Play again?</button>`;  
 
 function buildQuizForm() {
     console.log('build quiz form is being run!')
@@ -55,10 +55,10 @@ function buildQuizForm() {
         
         output.push(
           `<div class="slideBackground">
-                <div class="slide" +  id="currentSlide[` + questionNumber.toString() + `]">    
+                <div class="hidden" +  id="currentSlide[` + questionNumber.toString() + `]">    
                     <div class="table" id="quizProgressionTracker">
                         <ul id="horizontal-list">
-                            <li>Question: <span class="currentQuestion">` + $(currentQuestion) + `</span>/10</li>
+                            <li>Question: <span class="currentQuestion">` + currentQuestion + `</span>/10</li>
                             <li> Incorrect Score: ${incorrectScore}</li>
                             <li> Correct Score: ${correctScore}</li>
                         </ul>
@@ -70,27 +70,22 @@ function buildQuizForm() {
                 </div>
                 </div>`
 )
-    quizModalContainer.innerHTML = output.join("")
+    // quizModalContainer.innerHTML = output.join("")
+    $("#quizModalContainer").html(output.join(""))
 })
 }
 
-const nextButton = document.getElementById("nextButton");
-const slides = document.querySelectorAll(".slide");
+// const nextButton = document.getElementById("nextButton");
+// const slides = document.querySelectorAll(".slide");
 
-//function called Create Slide
+const createSlide = () => {
+    console.log("createslide is firing"); 
+    updateCurrentQuestion();
+    updateQuestionNumber();
+    currentSlide = document.getElementById('currentSlide['+ questionNumber.toString() + ']');
+    currentSlide.classList.toggle("hidden", false);
 
-//so for my pagination I have set all slides to having a class = "slide hidden". 
-//so if I need to use my function createSlide to target 'slide' + [questionNumber] and remove class "hidden" 
-
-
-// currentSlide = document.getElementById('currentSlide' + [questionNumber])
-
-// const createSlide = () => {
-//     console.log("createslide is firing");
-//     let currentSlide = document.getElementById('currentSlide['+ questionNumber.toString() + ']');
-//     // currentSlide.classList.toggle("hidden", currentQuestion <= 10 );
-
-// };
+};
 
 //   const showNextSlide = () => {
 //     updateQuestionNumber();
@@ -105,8 +100,8 @@ const slides = document.querySelectorAll(".slide");
      $("#quizModalContainer").html("#modalGutsTemplate")
      $("#quizProgressionTracker").html("#quizProgressionTracker")
      $("#questionsAndAnswers").html(buildQuizForm())
-     $("#buttonContainer").html(buttons)
-    //  createSlide();
+     $("#buttonContainer").html(buttons) 
+     createSlide();
     //  $("#nextButton").removeClass("hidden");
     //  hideStartPage();
      };
@@ -132,7 +127,7 @@ const updateCurrentQuestion = () => {
 
 const updateQuestionNumber = () => { 
     questionNumber ++;
-    $('.questionNumber').text(questionNumber+1)
+    //$('.questionNumber').text(questionNumber+1)
 };
 
 const userCorrectAnswer = () => {
