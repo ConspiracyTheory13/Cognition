@@ -72,7 +72,12 @@ function buildQuizForm() {
 )
     $("#quizModalContainer").html(output.join(""))
 })
-    // document.getElementById('nextButton').addEventListener("click", showNextSlide);
+
+const showNextSlide = () => {
+console.log("showNextSlide is firing");
+
+}
+
 let nextButton = document.getElementById("nextButton");
     nextButton.addEventListener("click", () => {
       showNextSlide();
@@ -81,7 +86,6 @@ let nextButton = document.getElementById("nextButton");
 }
 
 // const nextButton = document.getElementById("nextButton");
-// const slides = document.querySelectorAll(".slide");
 
 const createSlide = () => {
     console.log("createslide is firing"); 
@@ -92,12 +96,6 @@ const createSlide = () => {
     //  $("#nextButton").removeClass("hidden");
 };
 
-    // function showNextSlide() {
-const showNextSlide = () => {
-    console.log("shownextSlide is running!");
-    updateQuestionNumber();
-    updateCurrentQuestion();             
-  }
 
   const startQuiz = () => {
     console.log('startQuiz is being run!')
