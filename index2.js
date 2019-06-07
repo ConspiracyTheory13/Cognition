@@ -116,39 +116,78 @@ const STORE = [{
 
 
 let incorrectScore = 0;
-let correctScore = 10;
-let currentQuestionIndex = 9; 
+let correctScore = 0;
+let currentQuestionIndex = 5; 
 let currentSlide = 0;
-
 let buttons = `<button type="button" class="bttn hidden" id="scoreButton">Score me!</button>`
+let replayButton= `<button type="button" class="bttn" id="replayButton">Play again?</button>`    
 
-// const removeStartPageBackground = () => { 
-//     console.log('hidestartpage running');
-//     $("Background.png").addClass("hidden");
-//     }
+const scoreQuiz = () => {
+console.log('scoring quiz')
+let selectedAnswer = $(`input[name="question${currentQuestionIndex}"]:checked`).val();
+let isCorrect = STORE[currentQuestionIndex].correctAnswer == selectedAnswer
+if (isCorrect){
+console.log ('ding ding ding!');
+    $('.quizModalContainer').html(`
+    <div class="correctAnswer">
+        Congratulations! Your answer is correct!
+        <img src="brainlightbulb.png" alt="brainlightbulblitup">
+    </div>
+    <button type="button" class="bttn" id="nextButton">Next Question!</button>`);
+    incremementCorrectScore();
+} else {
+    $('.quizModalContainer').html(`
+    <div class="incorrectAnswer">
+        Sorry your answer was` + selectedAnswer +`and the correct answer was` + isCorrect + `.")
+    <img src="brainlightbulb.png" alt="brainlightbulbdim">
+    </div>
+    <button type="button" class="bttn" id="nextButton">Next Question!</button>`);
+    incrementIncorrectScore();
+}
+// So I feel like this should work but it's not, so I just added the button
+// to the end of the goodFeedback/badFeedback divs.
+// $('#quizModalContainer').append(`<button type="button" class="bttn" id="nextButton">Next Question!</button>`)
+console.log(`you've got ${correctScore} right, and ${incorrectScore} wrong.`)
+}
+
+const removeStartPageBackground = () => { 
+    console.log('hidestartpage running');
+    $("Background.png").addClass("hidden");
+    }
 
 const displayScorePage = () => {
     if (correctScore === 10) {
         $('#quizModalContainer').html(
             `<div class="slideBackground">
-            <div class="finalScoreScreen"><h1>Fantastic job! You've gotten a perfect score!</p><img src="perfect.png" alt="imageofbrainmaze">
-            </h1></div>
+                <div class="finalScoreScreen">
+                    <h1 class="finalScoreText">
+                        <p> Excellent job! You've gotten a perfect score!</p>
+                    </h1>
+                </div>
             </div> `)
         
     } else if (correctScore < 9 && correctScore >= 5) {
  
         $('#quizModalContainer').append(      
             `<div class="slideBackground">
-                <div class="finalScoreScreen"><h1> You've got ${correctScore} right, and ${incorrectScore} wrong. </h1></div>
+                <div class="finalScoreScreen">
+                    <h1 class="finalScoreText">
+                        <p> Fantastic job! You got ${correctScore} questions correct, and ${incorrectScore} wrong.</p>
+                    </h1>
+                </div>
             </div>`)
         
       } else {
  
-        $('#quizModalContainer').append(`<h1> Please try again! You got ${correctScore} answers correct, and ${incorrectScore} incorrect.</h1>`)
+        $('#quizModalContainer').append(
+            `<div class="slideBackground">
+                <div class="finalScoreScreen">
+                    <h1 class="finalScoreText">
+                        <p>Please try again! You got ${correctScore} answers correct, and ${incorrectScore} incorrect.<p>
+                    </h1>
+            </div>`)
     }
-       $('#buttonContainer').html`<button type="button" class="bttn" id="replayButton">Play again?</button>`
-       removeStartPageBackground();
-    
+    $('#buttons').append(replayButton);
     };
 
 function buildQuizForm() {
@@ -157,11 +196,13 @@ var output = [];
 const answers = [];
 Object.keys(STORE[currentQuestionIndex].answers).forEach(letter =>         
 {
-   answers.push( `<label>
-    <input type ="radio" checked name="question${currentQuestionIndex}" value = "${letter}">
-    ${letter}:
-    ${STORE[currentQuestionIndex].answers[letter]}
-    </label> <br>`);
+   answers.push( `
+    <label>
+        <form>
+            <input type ="radio" name="question${currentQuestionIndex}" value = "${letter}">
+            ${letter}:
+            ${STORE[currentQuestionIndex].answers[letter]}
+     </label> <br>`);
 })
 
 console.log(currentQuestionIndex)
@@ -170,51 +211,37 @@ let displayQuestionNumber = currentQuestionIndex + 1
 output.push(
  `<div class="slideBackground">
        <div  id="currentSlide[` + currentQuestionIndex.toString() + `]">    
-           <div class="table" id="quizProgressionTracker">
+           <div id="quizProgressionTracker">
                <ul id="horizontal-list">
                    <li>Question: <span class="currentQuestionIndex">` + displayQuestionNumber + `</span>/10</li>
                    <li> Incorrect Score: ${incorrectScore}</li>
                    <li> Correct Score: ${correctScore}</li>
                </ul>
            </div>
-           <div class="question-${currentQuestionIndex}">
+           <div class="question-${currentQuestionIndex}" id="question">
            <h1>${STORE[currentQuestionIndex].question}</h1>
-           <div class="answers">${answers.join("")}</div>
+           <div class="answers">${answers.join("")}           
            <button type="button" class="bttn" id="nextButton">Next Question!</button>
+           </div>
        </div>
-       </div>`
+       </div>
+       </form>`
 )
 $("#quizModalContainer").html(output.join(""))
-
-// let perfectScore =`<p>Fantastic job! You've gotten a perfect score!</p>`
-// let goodScore = `<p>Great job! You've gotten a perfect score!</p> `;
-// let badScore = `<p>Fantastic job! You've gotten a perfect score!</p> `;
-
-// const displayScorePage = () => {
-//     if (correctScore === 10) {
-//         $('#quizModalContPainer').html(perfectScore);  
-//     } else if (correctScore < 9 && correctScore >= 5) {
-//         $('#quizModalContainer').html( `<div class="goodScore">"goodScore!"</div> you've got ${correctScore} right, and ${incorrectScore} wrong. `) 
-//     } else {
-//         $('#quizModalContainer').html( `<div class="badScore">"Please try again! you've got ${correctScore} right, and ${incorrectScore} wrong."</div>`)
-//     }
-//     $('#quizModalContainer').append`<button type="button" class="bttn hidden" id="replayButton">Play again?</button>`};
-
     
 const showNextSlide = () => {
-console.log("showNextSlide is firing");
-scoreQuiz();
-$("#quizModalContainer").html("")
-incrementcurrentQuestionIndex();
-let areWeDone = currentQuestionIndex >= STORE.length
-if (areWeDone){
-console.log ('quiz over!')
-displayScorePage()
-} else {
-buildQuizForm();
-}
-
-}
+    console.log("showNextSlide is firing");
+    scoreQuiz();
+    $("#quizModalContainer").html("")
+    incrementcurrentQuestionIndex();
+    let areWeDone = currentQuestionIndex >= STORE.length
+    if (areWeDone){
+        console.log ('quiz over!')
+        displayScorePage()
+        } else {
+        buildQuizForm();
+        }
+};
 
 let nextButton = document.getElementById("nextButton");
 nextButton.addEventListener("click", () => {
@@ -245,18 +272,6 @@ console.log('hidestartpage running');
 $("#startingQuizPage").addClass("hidden");
 }
 
-const scoreQuiz = () => {
-console.log('scoring quiz')
-let selectedAnswer = $(`input[name="question${currentQuestionIndex}"]:checked`).val();
-let isCorrect = STORE[currentQuestionIndex].correctAnswer == selectedAnswer
-if (isCorrect){
-console.log ('ding ding ding!');
-incremementCorrectScore();
-} else {
-incrementIncorrectScore();
-}
-console.log(`you've got ${correctScore} right, and ${incorrectScore} wrong.`)
-}
 
 const incremementCorrectScore = () => {
 correctScore++;
