@@ -1,4 +1,3 @@
-// 1 set up score display (only at the end)
 // make sure to bind that cool restart function to the score display
 // rewrite replayQuiz to not use reload (contact help if this takes more than 5 minutes to do)
 
@@ -163,9 +162,10 @@ const displayScorePage = () => {
                     <h1 class="finalScoreText">
                         <p> Excellent job! You've gotten a perfect score!</p>
                     </h1>
+                    <button type="button" class="bttn" id="replayButton">Play again?</button>
                 </div>
             </div> `)
-        
+                
     } else if (correctScore < 9 && correctScore >= 5) {
  
         $('#quizModalContainer').append(      
@@ -174,6 +174,7 @@ const displayScorePage = () => {
                     <h1 class="finalScoreText">
                         <p> Fantastic job! You got ${correctScore} questions correct, and ${incorrectScore} wrong.</p>
                     </h1>
+                    <button type="button" class="bttn" id="replayButton">Play again?</button>
                 </div>
             </div>`)
         
@@ -185,10 +186,18 @@ const displayScorePage = () => {
                     <h1 class="finalScoreText">
                         <p>Please try again! You got ${correctScore} answers correct, and ${incorrectScore} incorrect.<p>
                     </h1>
+                    <button type="button" class="bttn" id="replayButton">Play again?</button>
+                </div>
             </div>`)
+        
     }
-    $('#buttons').append(replayButton);
-    };
+
+let replayButton = document.getElementById("replayButton");
+replayButton.addEventListener("click", () => {
+replayQuiz();
+console.log("replay Button clicked.");
+});
+};
 
 function buildQuizForm() {
 console.log('build quiz form is being run!')
@@ -250,7 +259,6 @@ console.log("Button clicked.");
 });
 }
 
-
 const createSlide = () => {
 console.log("createslide is firing"); 
 };
@@ -302,10 +310,3 @@ location.reload();
 };
 
 document.getElementById('startButton').addEventListener("click", startQuiz);
-// document.getElementById('nextButton').addEventListener("click", showNextSlide);
-// document.getElementById('replayButton').addEventListener("click", replayQuiz);
-// document.querySelector('form').addEventListener("submit", scoreUserInput);
-
-// document.addEventListener("DOMContentLoaded", function(){
-
-// });  
