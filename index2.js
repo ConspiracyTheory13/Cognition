@@ -1,4 +1,3 @@
-// make sure to bind that cool restart function to the score display
 // rewrite replayQuiz to not use reload (contact help if this takes more than 5 minutes to do)
 
 const STORE = [{
@@ -116,9 +115,8 @@ const STORE = [{
 
 let incorrectScore = 0;
 let correctScore = 0;
-let currentQuestionIndex = 5; 
+let currentQuestionIndex = 0; 
 let currentSlide = 0;
-let buttons = `<button type="button" class="bttn hidden" id="scoreButton">Score me!</button>`
 
 const showNextSlide = () => {
     console.log("showNextSlide is firing");
@@ -152,7 +150,7 @@ if (isCorrect){
     $('#quizModalContainer').html(`
     <div id="answerFeedbackIncorrect" class="answerFeedback">
         <h1>Incorrect! <br>
-            Sorry, your answer was ` + selectedAnswer.toString() +` and the correct answer was ` + STORE[currentQuestionIndex].correctAnswer + `."
+            Sorry, your answer was ` + STORE[currentQuestionIndex].answers[selectedAnswer] +` and the correct answer was ` + STORE[currentQuestionIndex].answers[STORE[currentQuestionIndex].correctAnswer] + `."
         </h1>
         <img src="brainlightbulb.png" alt="brainlightbulbdim">
         <button type="button" class="bttn" id="nextSlideButton">Next Question!</button>
@@ -225,7 +223,7 @@ Object.keys(STORE[currentQuestionIndex].answers).forEach(letter =>
    answers.push( `
     <label>
         <form>
-            <input type ="radio" name="question${currentQuestionIndex}" value = "${letter}">
+            <input type ="radio" checked name="question${currentQuestionIndex}" value = "${letter}">
             ${letter}:
             ${STORE[currentQuestionIndex].answers[letter]}
      </label> <br>`);
@@ -273,7 +271,6 @@ console.log('startQuiz is being run!')
 $("#quizModalContainer").html("#modalGutsTemplate")
 $("#quizProgressionTracker").html("#quizProgressionTracker")
 $("#questionsAndAnswers").html(buildQuizForm())
-$("#buttonContainer").html(buttons) 
 createSlide();
 hideStartPage();
 };
