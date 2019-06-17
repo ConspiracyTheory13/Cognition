@@ -68,7 +68,7 @@ const STORE = [{
     },
     
     {
-    question: 'You watch with baited breath as your race horse glides neck and neck with another, round and around the track. On the final lap your house begins to lag, but at the stretch makes a miraculous recovery. Nonetheless, your horse still loses. “It would have been better if it hadn’t been close at all!” you lament, racking your brain over all the small differences that would have let your horse win. This is an example of the:',
+    question: 'The horse you bet on in a race loses by a hair. “It would have been better if it hadn’t been close at all!” you lament, racking your brain over all the small differences that would have let your horse win. This is an example of the:',
     answers: {
         a:'Simulation heuristic',
         b:'Gambler’s Fallacy',
@@ -119,35 +119,52 @@ let correctScore = 0;
 let currentQuestionIndex = 5; 
 let currentSlide = 0;
 let buttons = `<button type="button" class="bttn hidden" id="scoreButton">Score me!</button>`
-let replayButton= `<button type="button" class="bttn" id="replayButton">Play again?</button>`    
+
+const showNextSlide = () => {
+    console.log("showNextSlide is firing");
+    $("#quizModalContainer").html("")
+    incrementcurrentQuestionIndex();
+    let areWeDone = currentQuestionIndex >= STORE.length
+    if (areWeDone){
+        console.log ('quiz over!')
+        displayScorePage()
+        } else {
+        buildQuizForm();
+        }
+    
+};
 
 const scoreQuiz = () => {
 console.log('scoring quiz')
 let selectedAnswer = $(`input[name="question${currentQuestionIndex}"]:checked`).val();
 let isCorrect = STORE[currentQuestionIndex].correctAnswer == selectedAnswer
 if (isCorrect){
-console.log ('ding ding ding!');
-    $('.quizModalContainer').html(`
-    <div class="correctAnswer">
-        Congratulations! Your answer is correct!
-        <img src="brainlightbulb.png" alt="brainlightbulblitup">
-    </div>
-    <button type="button" class="bttn" id="nextButton">Next Question!</button>`);
+    $('#quizModalContainer').html(`
+    <div class="answerFeedback" id="answerFeedbackCorrect">
+            <img src="brainlightbulbcorrect.png" alt="a black light bulb with a brain pattern colored yellow">
+            <h1>Correct!</h1>
+            <button type="button" class="bttn" id="nextSlideButton">Next Question!</button>
+        </div>`);
     incremementCorrectScore();
+    console.log ('ding ding ding!');
 } else {
-    $('.quizModalContainer').html(`
-    <div class="incorrectAnswer">
-        Sorry your answer was` + selectedAnswer +`and the correct answer was` + isCorrect + `.")
-    <img src="brainlightbulb.png" alt="brainlightbulbdim">
-    </div>
-    <button type="button" class="bttn" id="nextButton">Next Question!</button>`);
+    console.log ('else firing scoreQuiz');
+    $('#quizModalContainer').html(`
+    <div id="answerFeedbackIncorrect" class="answerFeedback">
+        <h1>Incorrect! <br>
+            Sorry, your answer was ` + selectedAnswer.toString() +` and the correct answer was ` + STORE[currentQuestionIndex].correctAnswer + `."
+        </h1>
+        <img src="brainlightbulb.png" alt="brainlightbulbdim">
+        <button type="button" class="bttn" id="nextSlideButton">Next Question!</button>
+    </div>`);
     incrementIncorrectScore();
 }
-// So I feel like this should work but it's not, so I just added the button
-// to the end of the goodFeedback/badFeedback divs.
-// $('#quizModalContainer').append(`<button type="button" class="bttn" id="nextButton">Next Question!</button>`)
-console.log(`you've got ${correctScore} right, and ${incorrectScore} wrong.`)
-}
+let showNextSlideButton = document.getElementById("nextSlideButton");
+    nextSlideButton.addEventListener("click", () => {
+    showNextSlide();
+    console.log(`you've got ${correctScore} right, and ${incorrectScore} wrong.`)
+    })
+};
 
 const removeStartPageBackground = () => { 
     console.log('hidestartpage running');
@@ -238,25 +255,12 @@ output.push(
 )
 $("#quizModalContainer").html(output.join(""))
     
-const showNextSlide = () => {
-    console.log("showNextSlide is firing");
-    scoreQuiz();
-    $("#quizModalContainer").html("")
-    incrementcurrentQuestionIndex();
-    let areWeDone = currentQuestionIndex >= STORE.length
-    if (areWeDone){
-        console.log ('quiz over!')
-        displayScorePage()
-        } else {
-        buildQuizForm();
-        }
-};
 
 let nextButton = document.getElementById("nextButton");
 nextButton.addEventListener("click", () => {
-showNextSlide();
-console.log("Button clicked.");
-});
+    scoreQuiz();
+    console.log("Button clicked.");
+    });
 }
 
 const createSlide = () => {
