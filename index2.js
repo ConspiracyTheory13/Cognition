@@ -3,9 +3,9 @@
 const STORE = [{
     question: 'You value your status as an informed person who always watches the news and stays up to date on local and world politics via the internet and social media. However, you are often afraid and imagine that crime rates are out of control. Your mind is using the:',
     answers: {
-       a:'Depressive Realism heuristic.',
-       b:'Availability heuristic.',
-       c:'Representativeness heuristic.',
+       a:'Depressive Realism heuristic',
+       b:'Availability heuristic',
+       c:'Representativeness heuristic',
        d:'Anchoring and Adjustment heuristic'
     },
     correctAnswer: 'b'
@@ -14,7 +14,7 @@ const STORE = [{
     {
     question: 'Certain words and phrases have powerful emotional affects, when your stomache clenches in dread at the word “cancer” or you feel a sense of unease from the word “death”. What shortcut is your mind using?',
     answers: {
-       a:'Affect heuristic.',
+       a:'Affect heuristic',
        b:'Terror Management Theory',
        c:'Scapegoat Theory',
        d:'Gut Reaction heuristic'
@@ -115,7 +115,7 @@ const STORE = [{
 
 let incorrectScore = 0;
 let correctScore = 0;
-let currentQuestionIndex = 0; 
+let currentQuestionIndex = 9; 
 let currentSlide = 0;
 
 const showNextSlide = () => {
@@ -138,23 +138,31 @@ let selectedAnswer = $(`input[name="question${currentQuestionIndex}"]:checked`).
 let isCorrect = STORE[currentQuestionIndex].correctAnswer == selectedAnswer
 if (isCorrect){
     $('#quizModalContainer').html(`
-    <div class="answerFeedback" id="answerFeedbackCorrect">
-            <img src="brainlightbulbcorrect.png" alt="a black light bulb with a brain pattern colored yellow">
-            <h1>Correct!</h1>
-            <button type="button" class="bttn" id="nextSlideButton">Next Question!</button>
-        </div>`);
+        <label>
+            <div class="answerFeedback" id="answerFeedbackCorrect">
+                    <img src="brainlightbulbcorrect.png" alt="a black light bulb with a brain pattern colored yellow">
+                    <label>
+                        <h1>Correct!</h1>
+                        <button type="button" class="bttn" id="nextSlideButton">Next Question!</button>
+                    </label>
+                </div>
+        </label>`);
     incremementCorrectScore();
     console.log ('ding ding ding!');
 } else {
     console.log ('else firing scoreQuiz');
     $('#quizModalContainer').html(`
-    <div id="answerFeedbackIncorrect" class="answerFeedback">
-        <h1>Incorrect! <br>
-            Sorry, your answer was ` + STORE[currentQuestionIndex].answers[selectedAnswer] +` and the correct answer was ` + STORE[currentQuestionIndex].answers[STORE[currentQuestionIndex].correctAnswer] + `."
-        </h1>
-        <img src="brainlightbulb.png" alt="brainlightbulbdim">
-        <button type="button" class="bttn" id="nextSlideButton">Next Question!</button>
-    </div>`);
+    <label>
+        <div id="answerFeedbackIncorrect" class="answerFeedback">
+            <label>   
+                <h1>Incorrect! <br>
+                        Sorry, your answer was ` + STORE[currentQuestionIndex].answers[selectedAnswer] +` and the correct answer was ` + STORE[currentQuestionIndex].answers[STORE[currentQuestionIndex].correctAnswer] + `."
+                </h1>
+            </label>
+            <img src="brainlightbulb.png" alt="a black light bulb with a brain pattern colored yellow">
+            <button type="button" class="bttn" id="nextSlideButton">Next Question!</button>
+        </div>
+    </label>`);
     incrementIncorrectScore();
 }
 let showNextSlideButton = document.getElementById("nextSlideButton");
@@ -175,7 +183,9 @@ const displayScorePage = () => {
             `<div class="slideBackground">
                 <div class="finalScoreScreen">
                     <h1 class="finalScoreText">
-                        <p> Excellent job! You've gotten a perfect score!</p>
+                        <label>
+                            <p> Excellent job! You've gotten a perfect score!</p>
+                        </label>
                     </h1>
                     <button type="button" class="bttn" id="replayButton">Play again?</button>
                 </div>
@@ -187,7 +197,9 @@ const displayScorePage = () => {
             `<div class="slideBackground">
                 <div class="finalScoreScreen">
                     <h1 class="finalScoreText">
-                        <p> Fantastic job! You got ${correctScore} questions correct, and ${incorrectScore} wrong.</p>
+                        <label>
+                            <p> Fantastic job! You got ${correctScore} questions correct, and ${incorrectScore} wrong.</p>
+                        </label>
                     </h1>
                     <button type="button" class="bttn" id="replayButton">Play again?</button>
                 </div>
@@ -199,7 +211,9 @@ const displayScorePage = () => {
             `<div class="slideBackground">
                 <div class="finalScoreScreen">
                     <h1 class="finalScoreText">
-                        <p>Please try again! You got ${correctScore} answers correct, and ${incorrectScore} incorrect.<p>
+                        <label>
+                            <p>Please try again! You got ${correctScore} answers correct, and ${incorrectScore} incorrect.<p>
+                        </label>
                     </h1>
                     <button type="button" class="bttn" id="replayButton">Play again?</button>
                 </div>
@@ -281,7 +295,6 @@ console.log('hidestartpage running');
 $("#startingQuizPage").addClass("hidden");
 }
 
-
 const incremementCorrectScore = () => {
 correctScore++;
 }
@@ -294,7 +307,6 @@ const incrementcurrentQuestionIndex = () => {
 console.log('incrementcurrentQuestionIndex run')
 currentQuestionIndex ++;
 }
-
 
 const userCorrectAnswer = () => {
 incremementCorrectScore();
