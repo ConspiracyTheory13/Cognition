@@ -115,11 +115,10 @@ const STORE = [{
 
 let incorrectScore = 0;
 let correctScore = 0;
-let currentQuestionIndex = 9; 
+let currentQuestionIndex = 0; 
 let currentSlide = 0;
 
 const showNextSlide = () => {
-    console.log("showNextSlide is firing");
     $("#quizModalContainer").html("")
     incrementcurrentQuestionIndex();
     let areWeDone = currentQuestionIndex >= STORE.length
@@ -128,12 +127,10 @@ const showNextSlide = () => {
         displayScorePage()
         } else {
         buildQuizForm();
-        }
-    
+        }    
 };
 
 const scoreQuiz = () => {
-console.log('scoring quiz')
 let selectedAnswer = $(`input[name="question${currentQuestionIndex}"]:checked`).val();
 let isCorrect = STORE[currentQuestionIndex].correctAnswer == selectedAnswer
 if (isCorrect){
@@ -148,9 +145,7 @@ if (isCorrect){
                 </div>
         </label>`);
     incremementCorrectScore();
-    console.log ('ding ding ding!');
 } else {
-    console.log ('else firing scoreQuiz');
     $('#quizModalContainer').html(`
     <label>
         <div id="answerFeedbackIncorrect" class="answerFeedback">
@@ -168,12 +163,10 @@ if (isCorrect){
 let showNextSlideButton = document.getElementById("nextSlideButton");
     nextSlideButton.addEventListener("click", () => {
     showNextSlide();
-    console.log(`you've got ${correctScore} right, and ${incorrectScore} wrong.`)
     })
 };
 
 const removeStartPageBackground = () => { 
-    console.log('hidestartpage running');
     $("Background.png").addClass("hidden");
     }
 
@@ -224,12 +217,10 @@ const displayScorePage = () => {
 let replayButton = document.getElementById("replayButton");
 replayButton.addEventListener("click", () => {
 replayQuiz();
-console.log("replay Button clicked.");
 });
 };
 
 function buildQuizForm() {
-console.log('build quiz form is being run!')
 var output = [];
 const answers = [];
 Object.keys(STORE[currentQuestionIndex].answers).forEach(letter =>         
@@ -243,7 +234,6 @@ Object.keys(STORE[currentQuestionIndex].answers).forEach(letter =>
      </label> <br>`);
 })
 
-console.log(currentQuestionIndex)
 let displayQuestionNumber = currentQuestionIndex + 1
 
 output.push(
@@ -271,55 +261,46 @@ $("#quizModalContainer").html(output.join(""))
 let nextButton = document.getElementById("nextButton");
 nextButton.addEventListener("click", () => {
     scoreQuiz();
-    console.log("Button clicked.");
     });
 }
 
-const createSlide = () => {
-console.log("createslide is firing"); 
-};
-
-
 const startQuiz = () => {
-console.log('startQuiz is being run!')
-$("#quizModalContainer").html("#modalGutsTemplate")
-$("#quizProgressionTracker").html("#quizProgressionTracker")
-$("#questionsAndAnswers").html(buildQuizForm())
-createSlide();
-hideStartPage();
+    $("#quizModalContainer").html("#modalGutsTemplate")
+    $("#quizProgressionTracker").html("#quizProgressionTracker")
+    $("#questionsAndAnswers").html(buildQuizForm())
+    createSlide();
+    hideStartPage();
 };
 
 
 const hideStartPage = () => { 
-console.log('hidestartpage running');
-$("#startingQuizPage").addClass("hidden");
+    $("#startingQuizPage").addClass("hidden");
 }
 
 const incremementCorrectScore = () => {
-correctScore++;
+    correctScore++;
 }
 
 const incrementIncorrectScore = () => {
-incorrectScore++;
+    incorrectScore++;
 };
 
 const incrementcurrentQuestionIndex = () => {
-console.log('incrementcurrentQuestionIndex run')
-currentQuestionIndex ++;
+    currentQuestionIndex ++;
 }
 
 const userCorrectAnswer = () => {
-incremementCorrectScore();
-correctAnswerFeedback();
+    incremementCorrectScore();
+    correctAnswerFeedback();
 }
 
 const userIncorrectAnswer = () => {
-incrementIncorrectScore();
-incorrectAnswerFeedback();
+    incrementIncorrectScore();
+    incorrectAnswerFeedback();
 }
 
 let replayQuiz = () => {
-location.reload();
+    location.reload();
 };
 
 document.getElementById('startButton').addEventListener("click", startQuiz);
