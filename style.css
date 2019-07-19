@@ -17,18 +17,10 @@ body {
   align-items: center;
 }
 
-main {
-  display: grid;
-  justify-items: center;
-  align-content: center;
-  flex: 1;
-}
 h1 {
   align-self: center;
-  padding: 10% 0% 10% 10%;
-  max-width: 70ch;  
-  min-width: 35ch;
   font-size: 25px;
+  /* line-height: 1.8; */
 }
 
 h2 {
@@ -44,121 +36,81 @@ h3 {
   font-size: 20px;
 }
 
-p {
-  position: relative;
-  right: 18%;
+.lightbulb {
+  width: 40vh;
 }
 
+.correctLightbulb {
+  fill: yellow;
+}
 
 .answerFeedback {
-  background-color: #D3D3D3C7;
-  height: 100vh;
+  background-color: #000000A6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  position: absolute;
-  left: 0;
-  top: 0;
 }
 
-#answerFeedbackCorrect > h1 {
-  position: absolute;
-  color: black;
-  top: 35%;
-  right: 5%;
+.answerSpacing {
+  display:flex;
+  justify-content: space-around;
+  flex-direction: column;
+  flex: 1;
 }
 
-#answerFeedbackIncorrect > h1 {
-  position: absolute;
-  color: black;
-  top: 35%;
-  right: 5%;
-  z-index: 2;
-}
-
-#answerFeedbackIncorrect > img {
-  height: 70%;
-  width: auto;
-  position: relative;  
-  padding-top: 10%;
-  left: 25%;
-}
-  
-
-#answerFeedbackCorrect > img{
-  height: 70%;
-  width: auto;
-  position: relative;  
-  padding-top: 10%;
-  left: 25%;
-}
-
-#incorrectAnswerFeedback > img { 
-  height: 70%;
-  width: auto;
-  position: relative;  
-  padding-top: 10%;
-  left: 25%;
-}
-
-#nextSlideButton {
-  position: relative;
-  top: 10%;
-  right: 18%;
+.userInputForm {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  height: 32vh;
 
 }
 
-#startingQuizPage {
-  padding: 5%;
-}
-
-#modalGutsTemplate {
-  justify-content: center;
-}
-
-#replayButton {
-  position: relative;
-  top: 65%;
-}
-
-#question {
-  text-align: center;
-  padding-left: 18%;
-  font-size: 16px;
-  max-width: 200ch;
-  font-style: bold;
-  width: 100%;
-  height: 20%;
-}
-
-#question > h1 {
-  position: relative;
-  padding: 10%;
-  right: 10%;
-}
-
-ul#horizontal-list {
+.horizontal-list {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-ul#horizontal-list li {
+.horizontal-list li {
   display: inline;
   font-weight: 4;
   font-size: 20px;
 }
 
-
 .slideBackground {
-  position: fixed;
-  top: 0%;
-  left: 0%;
-  width: 100%;
   height: 100vh;
   transition: opacity 0.5s; 
-  background-color: #000000A6;
+  background-color: #000000;
   z-index: 1;
   text-align: center;
-  }
+}
 
+.quizStarterScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  justify-content: space-evenly;
+}
 
+.quizModalContainer {
+  margin: 0;
+  padding: 0;
+}
+
+.currentSlide {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .modalGutsTemplate {
   flex: row;
@@ -184,132 +136,64 @@ ul#horizontal-list li {
   margin-top: 5%;
 }
 
-.buttonContainer {
-  padding: 15%;
-}
-
-
-.input {
-  height: 20px;
-  width: 20px;
-}
-
 .answers {
-  margin-left: 22%;
-  font-size: 25px;
-  text-align: justify;
-  line-height: 30px;
-  
+  font-size: 16px;
+  display: flex;
+  align-content: center;
+  flex: 1;
+  justify-content: space-around;
 }
 
-.nextButton {
+.labelSpacing {
+  display: flex;
+  justify-content: space-around;
+}
+
+/*justify-content: space-around, only in
+/* .nextButton {
   opacity: 0.5;
   pointer-events: none;
   opacity: 1 ;
   pointer-events: pointer;
   cursor: pointer;
-}
+} */
 
 .finalScoreScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: black;
   background-image: url('perfect.png');
   background-repeat: no-repeat;
-  background-position: 50% 50%;
+  background-position: center;
   width: 100%;
   height: 100%;
-  position:absolute;
-  margin: 0;
   text-align: center;
 }
 
-.finalScoreText {
-  position: absolute;
-  top: 20%;
-  left: 20%; 
-}
-.buttonContainer {
-  margin: 20%;
-  text-align: center;
-}
-
-
-@media screen and (max-width: 400px) {
-  #startingQuizPage {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
+/* @media screen and (max-width: 400px) {
+   }
   
   h1 {
     font-size: 18px;
-    padding: 5% 0 0 0;
-    position: relative;
-    left: 25%;
   }
 
   h2 {
     font-size: 16px;
-    position: relative;
-    left: 15%;
   }
 
-  #buttonContainer {
-    position: relative;
-    left: 20%;
-
-  }
-  #quizModalContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center
-    
-  }
-  
-  #quizProgressionTracker {
-    position: relative;
-    right: 6%;
-  }
-
-  #nextButton {
-    position: relative;
-    right: 10%;
-  }
-
-  #question {
-    position: relative;
-    right: 30%;
-  }
-
-  #question > h1 {
-    font-size: 16px;
-    padding: 8%;
-  }
-
-  #nextButton {
-    position: relative;
-    left: 25%;
-  }
-  .answers {
+.answers {
     font-size: 16px;
   }
 
-  .answerFeedback {
-    position: absolute;
-    width: 100vh;
-    height: 100vh;
-    top: 0;
-  }
+.finalScoreScreen {
+    /* background-position: 100% 5%; */
+  /* }
 
-  .finalScoreScreen {
-    background-position: 100% 5%;
-  }
-
-}
-
+} */
+/* 
 @media screen and (min-height: 680px) {
-  #question {
-    position: relative;
-    right: 7%;
+  
   }
-}
+}  */

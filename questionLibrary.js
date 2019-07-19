@@ -8,8 +8,6 @@ export const STORE = [
                'Anchoring and Adjustment heuristic'
           ],
           correctAnswer: 'Availability heuristic.'
-          // ,icon: somethingcooloragif.png,
-          // alt: 'idk'
      },
      {
           question: 'Certain words and phrases have powerful emotional affects, when your stomache clenches in dread at the word “cancer” or you feel a sense of unease from the word “death”. What shortcut is your mind using?',
