@@ -20,14 +20,8 @@ body {
 h1 {
   align-self: center;
   font-size: 25px;
-  /* line-height: 1.8; */
-}
-
-h2 {
-  align-items: center;
-  font-size: 20px;
-  max-width: 45ch; 
-  text-align: center;
+  max-width: 50ch;
+  line-height: 1.5;
 }
 
 h3 {
@@ -36,12 +30,28 @@ h3 {
   font-size: 20px;
 }
 
+p {
+  align-items: center;
+  font-size: 20px;
+  max-width: 50ch; 
+  text-align: center;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+li {
+  font-weight: heavy;
+}
 .lightbulb {
   width: 40vh;
 }
 
 .correctLightbulb {
   fill: yellow;
+}
+
+.quizProgressionTracker {
+  padding-bottom: 10%;
 }
 
 .answerFeedback {
@@ -81,8 +91,9 @@ h3 {
 
 .slideBackground {
   height: 100vh;
+  width: 100vw;
   transition: opacity 0.5s; 
-  background-color: #000000;
+  background-color:  #000000A6;
   z-index: 1;
   text-align: center;
 }
@@ -93,6 +104,7 @@ h3 {
   align-items: center;
   height: 100vh;
   justify-content: space-evenly;
+  text-align: left;
 }
 
 .quizModalContainer {
@@ -103,7 +115,6 @@ h3 {
 .currentSlide {
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
 
 .question {
@@ -149,15 +160,6 @@ h3 {
   justify-content: space-around;
 }
 
-/*justify-content: space-around, only in
-/* .nextButton {
-  opacity: 0.5;
-  pointer-events: none;
-  opacity: 1 ;
-  pointer-events: pointer;
-  cursor: pointer;
-} */
-
 .finalScoreScreen {
   display: flex;
   flex-direction: column;
@@ -172,7 +174,7 @@ h3 {
   text-align: center;
 }
 
-/* @media screen and (max-width: 400px) {
+@media screen and (max-width: 380px) {
    }
   
   h1 {
@@ -184,16 +186,20 @@ h3 {
   }
 
 .answers {
-    font-size: 16px;
+   font-size: 16px;
   }
 
-.finalScoreScreen {
-    /* background-position: 100% 5%; */
-  /* }
+.currentSlide {
+  padding: 5%;
+}
 
-} */
-/* 
+.quizStarterScreen {
+  padding: 5%;
+}
+
 @media screen and (min-height: 680px) {
+
+.answerFeedback {
+  padding: 5%;
   
   }
-}  */
